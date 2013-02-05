@@ -22,7 +22,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    This is my success page. <br>
+  	<h3>
+    This is my success logged in page. <br>
     Welcome, <s:property value="userid" />!
+    </h3>
   </body>
 </html>

@@ -11,16 +11,7 @@ public final class LoginService {
 	
 	private String url = null;
 	private String driver = null;
-	private String errMessage = null;
 	private User user;
-
-	public String getErrMessage() {
-		return errMessage;
-	}
-
-	public void setErrMessage(String errMessage) {
-		this.errMessage = errMessage;
-	}
 
 	public LoginService(String url, String driver){
 		this.url = url;
@@ -30,15 +21,15 @@ public final class LoginService {
 	public Boolean authenicateMe(User user) {
 		
 	      Connection conn = null;
+	      this.user = user;
 	      try {
 	         Class.forName(getDriver());
 	         conn = (Connection) DriverManager.getConnection(getUrl(), user.getUserid(), user.getPassword());
-	         this.user = user;
-	         setErrMessage(null); 
+	         this.user.setMessage(null); 
 	         return true;
 	         
 	      } catch (Exception e) {
-	    	  setErrMessage(e.getMessage()); 	
+	    	  this.user.setMessage(e.getMessage());
 	          return false;
 	      } finally {
 	         if (conn != null) {

@@ -8,7 +8,6 @@ import com.opensymphony.xwork2.ModelDriven;
 public final class LoginAction implements Action, ModelDriven<User> {
 
 	private User user = new User();
-	private String message = null;
 
 	@Override // Action
 	public String execute() {		
@@ -16,16 +15,7 @@ public final class LoginAction implements Action, ModelDriven<User> {
 		if (loginService.authenicateMe(user)) {
 			return SUCCESS;
 		}
-		setMessage(loginService.getErrMessage());
 		return ERROR;
-	}
-	
-	public String getMessage() {
-		return message;
-	}	
-	
-	public void setMessage(String message) {
-		this.message = message;
 	}
 
 	@Override // ModelDriven
