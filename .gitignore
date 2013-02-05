@@ -9,6 +9,7 @@
 .mystrutsdata
 .myumldata
 .settings/
+.reverse.properties
 
 # Compiled source #
 ###################

@@ -1,18 +1,19 @@
 package com.kcorner.webstrutslogin.action;
 
+import com.kcorner.webstrutslogin.model.User;
 import com.kcorner.webstrutslogin.service.LoginService;
 import com.opensymphony.xwork2.Action;
+import com.opensymphony.xwork2.ModelDriven;
 
-public final class LoginAction implements Action{
-	
-	private String userid;
-	private String password;
+public final class LoginAction implements Action, ModelDriven<User> {
+
+	private User user = new User();
 	private String message = null;
 
 	@Override // Action
 	public String execute() {		
 		LoginService loginService = new LoginService("jdbc:mysql://localhost:3306/sakila", "com.mysql.jdbc.Driver");
-		if (loginService.authenicateMe(getUserid(), getPassword())) {
+		if (loginService.authenicateMe(user)) {
 			return SUCCESS;
 		}
 		setMessage(loginService.getErrMessage());
@@ -26,17 +27,10 @@ public final class LoginAction implements Action{
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public String getUserid() {
-		return userid;
-	}
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
+
+	@Override // ModelDriven
+	public User getModel() {
+		return user;
 	}
 	
 	

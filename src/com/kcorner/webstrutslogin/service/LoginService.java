@@ -3,6 +3,7 @@ package com.kcorner.webstrutslogin.service;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 
+import com.kcorner.webstrutslogin.model.User;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
@@ -10,9 +11,8 @@ public final class LoginService {
 	
 	private String url = null;
 	private String driver = null;
-	private String userid = null;
-	private String password = null;
 	private String errMessage = null;
+	private User user;
 
 	public String getErrMessage() {
 		return errMessage;
@@ -27,14 +27,14 @@ public final class LoginService {
 		this.driver = driver;
 	}
 	
-	public Boolean authenicateMe(String userid, String password) {
+	public Boolean authenicateMe(User user) {
 		
 	      Connection conn = null;
 	      try {
 	         Class.forName(getDriver());
-	         conn = (Connection) DriverManager.getConnection(getUrl(), userid, password);
-	         setUserid(userid);
-	         setPassword(password);
+	         conn = (Connection) DriverManager.getConnection(getUrl(), user.getUserid(), user.getPassword());
+	         this.user = user;
+	         setErrMessage(null); 
 	         return true;
 	         
 	      } catch (Exception e) {
@@ -54,7 +54,7 @@ public final class LoginService {
 	      Connection conn = null;
 	      try {
 	         Class.forName(getDriver());
-	         conn = (Connection) DriverManager.getConnection(getUrl(), getUserid(), getPassword());
+	         conn = (Connection) DriverManager.getConnection(getUrl(), user.getUserid(), user.getPassword());
 	         PreparedStatement ps = (PreparedStatement) conn.prepareStatement(sql);
 	         ResultSet rs = ps.executeQuery();
 
@@ -72,22 +72,6 @@ public final class LoginService {
 	      }
 	      
 	}
-
-	public String getUserid() {
-		return userid;
-	}
-
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}	
 	
 	public String getUrl() {
 		return url;
