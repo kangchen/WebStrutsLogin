@@ -33,20 +33,20 @@
  <body>
 
 	<div class="background" id="main" style="position: absolute; top: 13px; left: 15px;"></div>
-    <div class="loginbox" style="position: absolute; top: 117px; left: 174px; width: 264px; height: 176px;">
-     
+    <div class="loginbox" style="position: absolute; top: 117px; left: 174px; width: 264px; height: 176px;">    
 	<s:form action="getLogin">
 		<table style="top: 1px; left: 1px; width: 255px; height: 140px;">
 		<tr>
-		 	<td align=right>User Name</td><td><input type="text" name="userid"></td>
+		 	<td align=right>User Name</td><td><input type="text" name="userid"/></td>
 		</tr>
 		<tr>
-		 	<td align=right>Password</td><td><input type="password" name="password"></td>
+		 	<td align=right>Password</td><td><input type="password" name="password"/></td>
 		</tr>
 		<tr>
-			<td></td><td><input type="submit" value="S u b m i t"> <input type="reset" value="C l e a r"></td>
+			<td><td><input type="submit" value="L o g i n"> <input type="reset" value="C l e a r"></td>
 		</tr>
 		</table>
+		<font size=4 color=red><s:fielderror /></font>
 	</s:form>
 	<font color=red><s:property value="message"/></font>
 	</div>
